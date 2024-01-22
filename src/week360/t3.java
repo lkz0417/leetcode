@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class t3 {
-  public static int minOperations(List<Integer> nums, int target) {
+  public int minOperations(List<Integer> nums, int target) {
     long sum=0;
     for(int num:nums){
       sum+=num;
@@ -32,18 +32,19 @@ public class t3 {
     }
     List<Integer> list=new ArrayList<>();
     for(int i=0;i<32;i++){
-      if(goal[i]!=0){
+      if(goal[i]<=binary[i]){
+        if(goal[i]!=0){
+          binary[i]--;
+        }
+        goal[i]=0;
+      }else{
         list.add(i);
       }
     }
     int res=0;
     for(int i=0;i<list.size();i++){
       int pos=list.get(i);
-      if(binary[pos]!=0){
-        binary[pos]--;
-        continue;
-      }
-      for(int j=0;j<pos;j++){
+      for(int j=i==0?0:list.get(i-1);j<pos;j++){
         if(binary[j]>=2){
           if(binary[j]%2==0){
             binary[j+1]+=binary[j]/2;
@@ -70,17 +71,6 @@ public class t3 {
       binary[pos]--;
     }
     return res;
-  }
-
-  public static void main(String[] args) {
-    List<Integer> nums=new ArrayList<>();
-    nums.add(1);
-    nums.add(1);
-    nums.add(1);
-    nums.add(1);
-    nums.add(2);
-    int res=minOperations(nums,6);
-    System.out.println(res);
   }
 
 }
