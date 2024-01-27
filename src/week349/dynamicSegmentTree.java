@@ -3,10 +3,20 @@ package week349;
 public class dynamicSegmentTree {
   Node root;
   int size;
+
   public dynamicSegmentTree(int n){
     root = null;
     size = n;
   }
+
+  public void update(int l, int r, int delta){
+    root = update(root, 0, size - 1, l, r, delta);
+  }
+
+  public int query(int l, int r){
+    return query(root, 0, size - 1, l, r);
+  }
+
   public Node update(Node node,int start, int end, int l, int r, int delta){
     if(node == null){
       node = new Node();
