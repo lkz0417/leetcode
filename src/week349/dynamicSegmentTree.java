@@ -15,10 +15,12 @@ public class dynamicSegmentTree {
     int mid = (end - start) / 2 + start;
     if(node.lazy > 0){
       node.val += (end - start + 1) * delta;
-      if(node.left == null) node.left = new Node();
-      if(node.right == null) node.right = new Node();
-      node.left.lazy += node.lazy;
-      node.right.lazy += node.lazy;
+      if(start != end){
+        if(node.left == null) node.left = new Node();
+        if(node.right == null) node.right = new Node();
+        node.left.lazy += node.lazy;
+        node.right.lazy += node.lazy;
+      }
       node.lazy = 0;
     }
     if(l > end || r < start){
@@ -26,10 +28,13 @@ public class dynamicSegmentTree {
     }
     if(l >= start && r <= end){
       node.val += (end - start +1) * delta;
-      if(node.left == null) node.left = new Node();
-      if(node.right == null) node.right = new Node();
-      node.left.lazy += delta;
-      node.right.lazy += delta;
+      if(start != end){
+        if(node.left == null) node.left = new Node();
+        if(node.right == null) node.right = new Node();
+        node.left.lazy += delta;
+        node.right.lazy += delta;
+      }
+
       return node;
     }
     node.left = update(node.left ,start, mid, l, r ,delta);
@@ -44,10 +49,12 @@ public class dynamicSegmentTree {
     }
     if(node.lazy > 0){
       node.val += (end - start +1) * node.lazy;
-      if(node.left == null) node.left = new Node();
-      if(node.right == null) node.right = new Node();
-      node.left.lazy += node.lazy;
-      node.right.lazy +=node.lazy;
+      if(start != end){
+        if(node.left == null) node.left = new Node();
+        if(node.right == null) node.right = new Node();
+        node.left.lazy += node.lazy;
+        node.right.lazy +=node.lazy;
+      }
       node.lazy = 0;
     }
     if(start <= l && end >= r){
@@ -67,9 +74,9 @@ class Node{
   Node left;
   Node right;
   public Node(){
-    val=0;
-    lazy=0;
-    left=null;
-    right=null;
+    val = 0;
+    lazy = 0;
+    left = null;
+    right = null;
   }
 }
