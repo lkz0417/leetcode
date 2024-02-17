@@ -36,8 +36,8 @@ public class dynamicSegmentTree {
     if(l > end || r < start){
       return node;
     }
-    if(l >= start && r <= end){
-      node.val += (end - start +1) * delta;
+    if(l <= start && r >= end){
+      node.val += (end - start + 1) * delta;
       if(start != end){
         if(node.left == null) node.left = new Node();
         if(node.right == null) node.right = new Node();
