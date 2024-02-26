@@ -67,7 +67,7 @@ public class dynamicSegmentTree {
       }
       node.lazy = 0;
     }
-    if(start <= l && end >= r){
+    if(start >= l && end <= r){
       return node.val;
     }
     int mid = (end - start) / 2 + start;
